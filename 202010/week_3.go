@@ -1,12 +1,18 @@
 /*
  * @Date: 2020-10-21 16:08:53
- * @LastEditTime: 2020-10-22 18:42:36
+ * @LastEditTime: 2020-10-23 13:14:31
  * @LastEditors: mmx
  */
 package main
 
-func main() {
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
 
+func main() {
+	reverse(-132)
 }
 
 /**
@@ -65,4 +71,52 @@ func lengthOfLongestSubstring(s string) int {
 		}
 	}
 	return result + 1
+}
+
+/**
+ * @Date: 2020-10-22 21:32:09
+ * @LastEditors: mmx
+ * @param {string} date
+ * @title 转变日期格式
+ * @rule 给你一个字符串 date ，它的格式为 Day Month Year ，其中：
+			Day 是集合 {"1st", "2nd", "3rd", "4th", ..., "30th", "31st"} 中的一个元素。
+			Month 是集合 {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"} 中的一个元素。
+			Year 的范围在 ​[1900, 2100] 之间。
+			请你将字符串转变为 YYYY-MM-DD 的格式，其中：
+
+			YYYY 表示 4 位的年份。
+			MM 表示 2 位的月份。
+			DD 表示 2 位的天数。  输入：date = "20th Oct 2052"  输出："2052-10-20"
+ * @url https://leetcode-cn.com/problems/reformat-date/
+ * @param {string} s
+*/
+func reformatDate(date string) string {
+	dateMap := map[string]string{
+		"Jan": "1", "Feb": "2", "Mar": "3", "Apr": "4", "May": "5", "Jun": "6", "Jul": "7", "Aug": "8", "Sep": "9", "Oct": "10", "Nov": "11", "Dec": "12",
+	}
+	newDate := strings.Split(date, " ")
+	day, _ := strconv.Atoi(newDate[0][:len(newDate[0])-2])
+	return fmt.Sprintf("%s-%02s-%02d", newDate[2], dateMap[newDate[1]], day)
+}
+
+/**
+ * @Date: 2020-10-23 11:45:37
+ * @LastEditors: mmx
+ * @title 整数反转
+ * @rule 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
+ * @url https://leetcode-cn.com/problems/reverse-integer/
+ * @param {int} x
+ */
+func reverse(x int) int {
+	max := 1<<31 - 1
+	min := -1 << 31
+	y := 0
+	for x != 0 {
+		y = y*10 + (x % 10)
+		x /= 10
+	}
+	if y > max || y < min {
+		return 0
+	}
+	return y
 }
