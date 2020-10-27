@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-10-21 16:08:53
- * @LastEditTime: 2020-10-23 13:14:31
+ * @LastEditTime: 2020-10-26 17:35:53
  * @LastEditors: mmx
  */
 package main
@@ -10,10 +10,6 @@ import (
 	"strconv"
 	"strings"
 )
-
-func main() {
-	reverse(-132)
-}
 
 /**
  * @Date: 2020-10-21 17:42:00
