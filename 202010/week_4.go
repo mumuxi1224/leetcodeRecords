@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-10-26 17:34:58
- * @LastEditTime: 2020-10-27 18:57:01
+ * @LastEditTime: 2020-10-28 17:25:04
  * @LastEditors: mmx
  */
 package main
@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	fmt.Println(intToRoman(20))
+	fmt.Println(romanToInt("MCMXCIV"))
 }
 
 /**
@@ -78,5 +78,45 @@ func intToRoman(num int) string {
 		}
 	}
 
+	return result
+}
+
+/**
+ * @Date: 2020-10-28 15:56:36
+ * @LastEditors: mmx
+ * @title 罗马数字转整数
+ * @url https://leetcode-cn.com/problems/roman-to-integer/
+ * @param {string} s
+ */
+func romanToInt(s string) int {
+	var result int
+	arr := map[byte]int{'M': 1000, 'D': 500, 'C': 100, 'L': 50, 'X': 10, 'V': 5, 'I': 1}
+	leng := len(s)
+	prve := 0
+	//从左往右遍历，当前的字符大于等于上一个字符，则加当前值减去2倍上次值； 否则累加
+	// for i := 0; i < leng; i++ {
+	// 	v, _ := arr[s[i]]
+
+	// 	if v > prve {
+	// 		result += v - 2*prve
+
+	// 	} else {
+	// 		result += v
+	// 	}
+	// 	prve = v
+	// }
+
+	// return result
+
+	// 从右往左遍历，当前的字符大于等于上一个字符，则累加； 否则累减
+	for i := leng - 1; i >= 0; i-- {
+		v, _ := arr[s[i]]
+		if v >= prve {
+			result += v
+		} else {
+			result -= v
+		}
+		prve = v
+	}
 	return result
 }
