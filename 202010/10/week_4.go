@@ -1,6 +1,6 @@
 /*
  * @Date: 2020-10-26 17:34:58
- * @LastEditTime: 2020-10-28 17:25:04
+ * @LastEditTime: 2020-10-28 19:11:19
  * @LastEditors: mmx
  */
 package main
@@ -10,7 +10,8 @@ import (
 )
 
 func main() {
-	fmt.Println(romanToInt("MCMXCIV"))
+	strs := []string{"flow", "flight"}
+	fmt.Println(longestCommonPrefix(strs))
 }
 
 /**
@@ -117,6 +118,53 @@ func romanToInt(s string) int {
 			result -= v
 		}
 		prve = v
+	}
+	return result
+}
+
+/**
+ * @Date: 2020-10-28 17:29:29
+ * @LastEditors: mmx
+ * @title 最长公共前缀
+ * @url https://leetcode-cn.com/problems/longest-common-prefix/
+ * @param {[]string} strs
+ */
+func longestCommonPrefix(strs []string) string {
+	var result string
+	checkPrefix := func(s1, s2 string) string {
+		var perfix string
+		if len(s1) > len(s2) {
+			for k, v := range s2 {
+				fmt.Println(v, s2[k])
+				// if v == rune(s2[k]) {
+				// 	perfix += string(v)
+				// } else {
+				// 	return perfix
+				// }
+			}
+		} else {
+			for k, v := range s1 {
+				fmt.Println(type v, s1[k])
+				// if v == rune(s1[k]) {
+				// 	perfix += string(v)
+				// } else {
+				// 	return perfix
+				// }
+			}
+		}
+		return perfix
+	}
+	leng := len(strs)
+	for i := 1; i < leng; i++ {
+		if len(result) > 0 {
+			result = checkPrefix(result, strs[i])
+		} else {
+			result = checkPrefix(strs[0], strs[i])
+		}
+		fmt.Println(result)
+		if len(result) == 0 {
+			return result
+		}
 	}
 	return result
 }
